@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria.ID;
 
 namespace FunCommand.Commands
 {
@@ -46,31 +47,56 @@ namespace FunCommand.Commands
                 #region Help
                 if (DetermineAxn(determinant, "Help"))
                 {
-                    Main.NewText(AxnText("Help.HelpList"));
+                    if (CheckUsage(para1, "Help")) ;
+                    else if (para1 != default)
+                    {
+                        ReplyInvalidPara(para1);
+                    }
+                    else 
+                    {
+                        Main.NewText(AxnText("Help.HelpList"));
+                    }
                 }
                 #endregion
                 #region Actions
-                if (DetermineAxn(determinant, "Actions"))
+                else if (DetermineAxn(determinant, "Actions"))
                 {
-                    Main.NewText(AxnText("Actions.ActionList"));
+                    if (CheckUsage(para1, "Actions")) ;
+                    else if (para1 != default)
+                    {
+                        ReplyInvalidPara(para1);
+                    }
+                    else
+                    {
+                        Main.NewText(AxnText("Actions.ActionList"));
+                    }
                 }
                 #endregion
                 #region Tips
-                if (DetermineAxn(determinant, "Tips"))
+                else if (DetermineAxn(determinant, "Tips"))
                 {
-                    Main.NewText(AxnText("Tips.TipList"));
+                    if (CheckUsage(para1, "Tips")) ;
+                    else if (para1 != default)
+                    {
+                        ReplyInvalidPara(para1);
+                    }
+                    else
+                    {
+                        Main.NewText(AxnText("Tips.TipList"));
+                    }
                 }
                 #endregion
                 #region SprayWater
-                if (DetermineAxn(determinant, "SprayWater"))
+                else if (DetermineAxn(determinant, "SprayWater"))
                 {
                     if (para1 == default)
                     {
                         mPlayer.sprayWaterTimer = 600;
                     }
-                    else if (!int.TryParse(para1, out int time))
+                    else if (CheckUsage(para1, "SprayWater")) ;
+                    else if (!int.TryParse(para1, out int time) || time < 0)
                     {
-                        throw new UsageException($"{args[0]} {ComText("IsNotAValid")} {ComText("Int")}");
+                        Main.NewText($"\"{para1}\" {ComText("IsNotAValid")} {ComText("Int")}, {ComText("Range")}: >=0", Colors.RarityRed);
                     }
                     else
                     {
@@ -78,15 +104,42 @@ namespace FunCommand.Commands
                     }
                 }
                 #endregion
+                #region Invalid Action
+                else
+                {
+                    ReplyInvalidAction(determinant);
+                }
+                #endregion
             }
         }
-        private bool DetermineAxn(string determinant, string key)
+        private bool DetermineAxn(string determinant, string name)
         {
-            return determinant.ToLower() == AxnText($"{key}.Name_En") || determinant == AxnText($"{key}.Name_Zh");
+            return determinant.ToLower() == AxnText($"{name}.Name_En") || determinant == AxnText($"{name}.Name_Zh");
+        }
+        private bool CheckUsage(string para, string name)
+        {
+            bool check = para == "?" || para == "？";
+            if (check)
+            {
+                ShowUsage(name);
+            }
+            return check;
         }
         private void ShowAbout()
         {
-            Main.NewText(ComText("About"));
+            Main.NewText(ComText("About"), Colors.RarityYellow);
+        }
+        private void ShowUsage(string name)
+        {
+            Main.NewText(AxnText($"{name}.Usage"), Colors.RarityYellow);
+        }
+        private void ReplyInvalidAction(string action)
+        {
+            Main.NewText($"\"{action}\" {ComText("IsNotAValid")} {ComText("Action")}. {ComText("SeeActions")}", Colors.RarityRed);
+        }
+        private void ReplyInvalidPara(string para)
+        {
+            Main.NewText($"\"{para}\" {ComText("IsNotAValid")} {ComText("Para")}. {ComText("SeeActions")}", Colors.RarityRed);
         }
     }
 }

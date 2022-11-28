@@ -6,15 +6,25 @@
 		{
 			About : 
 				'''
+				---
 				Fun Commands adds many fun chat commands
 				Most of them are just for fun
 				Report bugs as Steam workshop comments or GitHub issue
 				For the help list, use: /fun help
+				---
 				'''
+			SeeActions : "For the action list, use: /fun axns"
+			SeeTips : "For the tip list, use: /fun tips"
 
 			IsNotValid : "is not valid"
 			IsNotAValid : "is not a valid"
+
 			Int : "int"
+			Float : "float"
+			Action : "action"
+			Para : "parameter"
+
+			Range : "range"
 		}
 		Commands : 
 		{
@@ -22,7 +32,7 @@
 			{
 				Command : "fun"
 				Desc : "Show Fun Commands intro"
-				Usage : "/fun or /fun <action>"
+				Usage : "/fun or /fun <action> [para]"
 			}
 		}
 		CommandActions : 
@@ -31,40 +41,52 @@
 			{
 				Name_En : "help"
 				Name_Zh : "帮助"
+				Usage : "(no parameter) show the help list"
 				HelpList : 
 					'''
+					---
 					For the action list, use: /fun axns
 					For the tip list, use: /fun tips
-					About the commands, use: /fun
+					---
 					'''
 			}
 			Actions : 
 			{
 				Name_En : "axns"
 				Name_Zh : "功能"
+				Usage : "(no parameter) show the action list"
 				ActionList : 
 					'''
+					---
+					<action> ?/？ - show you how to use this action
 					help/帮助 - show the help list
 					axns/功能 - show the action list
 					tips/提示 - show the tip list
 					spraywater/喷水 [time = 600] - your player will spray water for [time] ticks
+					---
 					'''
 			}
 			Tips : 
 			{
 				Name_En : "tips"
 				Name_Zh : "提示"
+				Usage : "(no parameter) show the tip list"
 				TipList : 
 					'''
+					---
 					1 second = 60 ticks
 					All commands start with a "/"
 					Fun Commands uses "/fun <action>" to invoke an action
+					"<x>" means you need to input a "x" without the "<>"
+					"[y = a]" means you can input a "y" without the "[]", the default value of y is a
+					---
 					'''
 			}
 			SprayWater : 
 			{
 				Name_En : "spraywater"
 				Name_Zh : "喷水"
+				Usage : "[time(tick) = 600] your player will spray water for [time] ticks"
 			}
 		}
 	}
