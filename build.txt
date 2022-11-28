@@ -1,0 +1,3 @@
+displayName = Fun Commands
+author = Lacewing
+version = 0.1
