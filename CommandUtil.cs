@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Terraria.ID;
+using IL.Terraria.GameContent.Generation;
 
 namespace FunCommand
 {
@@ -77,6 +78,17 @@ namespace FunCommand
         /// <summary>
         /// </summary>
         /// <param name="name"></param>
+        /// <returns>A string[] contains all paras of the action</returns>
+        public static string[] AxnPara(string name)
+        {
+            List<string> para = new List<string>();
+            para.Add(AxnText(name + ".Para_En"));
+            para.Add(AxnText(name + ".Para_Zh"));
+            return para.ToArray();
+        }
+        /// <summary>
+        /// </summary>
+        /// <param name="name"></param>
         /// <returns>A string[] contains all triggers of the parameter's action</returns>
         public static string[] ParaTrig(string name)
         {
@@ -124,13 +136,17 @@ namespace FunCommand
         /// <param name="para"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static bool QueryAxn(string para, string name)
+        public static bool QueryAxn(string para, string name, string lang = default)
         {
             bool go = true;
+            bool en = true, zh = true;
             if (para == "?" || para == "？")
             {
-                Main.NewText(AxnText($"{name}.Usage"));
-                return !go;
+                if (QueryLang(lang, out en, out zh))
+                {
+                    Main.NewText(AxnUsage(name, en, zh), Colors.RarityYellow);
+                }
+                go = false;
             }
             return go;
         }
@@ -144,13 +160,60 @@ namespace FunCommand
             }
             return go;
         }
+        /// <summary>
+        /// Check if the lang triggers En or Zh, triggers both when lang = default
+        /// </summary>
+        /// <param name="lang"></param>
+        /// <param name="en"></param>
+        /// <param name="zh"></param>
+        /// <returns>true is the lang is supported</returns>
+        public static bool QueryLang(string lang, out bool en, out bool zh)
+        {
+            bool go = true;
+            en = zh = true;
+            if (lang != default)
+            {
+                lang = lang.ToLower();
+                if (ParaTrig("En").Contains(lang))
+                {
+                    zh = false;
+                }
+                else if (ParaTrig("Zh").Contains(lang))
+                {
+                    en = false;
+                }
+                if (!en && !zh)
+                {
+                    Main.NewText($"\"{lang}\" {ComText("IsNotASupported")} {ComText("Language")}", Colors.RarityRed);
+                    go = false;
+                }
+            }
+            return go;
+        }
         public static void ShowAbout()
         {
             Main.NewText(ComText("About"), Colors.RarityYellow);
         }
-        public static void ShowUsage(string name)
+        public static string AxnUsage(string name, bool en = true, bool zh = true)
         {
-            Main.NewText(AxnText($"{name}.Usage"), Colors.RarityYellow);
+            string trigger = "" , para = "", usage = AxnText(name + ".Usage"), result = "";
+            if (en)
+            {
+                trigger += AxnTrig(name)[0];
+                para += AxnPara(name)[0];
+            }
+            if (en && zh)
+            {
+                trigger += "/";
+                para += "/";
+            }
+            if (zh)
+            {
+                trigger += AxnTrig(name)[1];
+                para += AxnPara(name)[1];
+            }
+            result = $"{trigger} {para} - {usage}";
+            return result;
         }
         public static void ReplyInvalidAction(string action)
         {

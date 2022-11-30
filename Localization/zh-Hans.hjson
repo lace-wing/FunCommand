@@ -6,65 +6,153 @@
 		{
 			About : 
 				'''
-				Fun Commands adds many fun chat commands
-				Most of them are just for fun
-				Report bugs as Steam workshop comments or GitHub issue
-				For the help list, use: /fun help
+				***
+				乐子指令 (Fun Commands) 加入了一些有趣的聊天指令 (在聊天框输入的指令)
+				大部分只是为了好玩
+				在创意工坊留言或创建 GitHub issue 来反馈bug
+				帮助列表: /fun help
+				***
 				'''
+			SeeActions : "功能列表详见: /fun axns"
+			SeeTips : "提示列表详见: /fun tips"
 
-			IsNotValid : "is not valid"
-			IsNotAValid : "is not a valid"
-			Int : "int"
+			IsNotValid : "无效"
+			IsNotAValid : "不是一个有效的"
+			IsNotSupported : "不受支持"
+			IsNotASupported : "不是一个受支持的"
+
+			Language : "语言"
+
+			Int : "整数"
+			Float : "浮点数"
+			Action : "功能"
+			Para : "变量"
+
+			Range : "范围"
+
+			Copper : "铜"
+			Silver : "银"
+			Gold : "金"
+			Platinum : "铂"
+
+			IHaveSpent : "我已经花了"
+			ToReforge : "来重铸"
+			TinkersHaveEarn : "哥布林工匠已经从重铸中挣了"
+			FromReforging : ""
 		}
 		Commands : 
 		{
 			Fun : 
 			{
 				Command : "fun"
-				Desc : "Show Fun Commands intro"
-				Usage : "/fun or /fun <action>"
+				Desc : "显示乐子指令简介"
+				Usage : "/fun 或 /fun <功能> [变量]"
 			}
 		}
 		CommandActions : 
 		{
+			InvalidAction : 
+			{
+				Trigger_En : "invalidaxn"
+				Trigger_Zh : "无效功能"
+				Para_En : "(no parameter)"
+				Para_Zh : "(无变量)"
+				Usage : "无效功能"
+			}
 			Help : 
 			{
-				Name_En : "help"
-				Name_Zh : "帮助"
+				Trigger_En : "help"
+				Trigger_Zh : "帮助"
+				Para_En : "(no parameter)"
+				Para_Zh : "(无变量)"
+				Usage : "显示帮助列表"
 				HelpList : 
 					'''
-					For the action list, use: /fun axns
-					For the tip list, use: /fun tips
-					About the commands, use: /fun
+					***
+					功能列表详见: /fun axns
+					提示列表详见: /fun tips
+					***
 					'''
 			}
 			Actions : 
 			{
-				Name_En : "axns"
-				Name_Zh : "功能"
-				ActionList : 
-					'''
-					help/帮助 - show the help list
-					axns/功能 - show the action list
-					tips/提示 - show the tip list
-					spraywater/喷水 [time = 600] - your player will spray water for [time] ticks
-					'''
+				Trigger_En : "axns"
+				Trigger_Zh : "功能"
+				Para_En : "[en/zh]"
+				Para_Zh : "[英/中]"
+				Usage : "显示功能列表"
 			}
 			Tips : 
 			{
-				Name_En : "tips"
-				Name_Zh : "提示"
+				Trigger_En : "tips"
+				Trigger_Zh : "提示"
+				Para_En : "[en/zh]"
+				Para_Zh : "[英/中]"
+				Usage : "显示提示列表"
 				TipList : 
 					'''
-					1 second = 60 ticks
-					All commands start with a "/"
-					Fun Commands uses "/fun <action>" to invoke an action
+					***
+					1秒 = 60帧
+					所有指令以 "/" 开头
+					乐子指令用 "/fun <功能> [变量]" 来调用功能
+					在功能或变量后面加上一个 "？" 变量以查询
+					"<x>" 指你需要输入一个 "x" (不带 "<>")
+					"[y = a]" 指你可以输入一个 "y" (不带 "[]"), y默认为a
+					***
 					'''
 			}
 			SprayWater : 
 			{
-				Name_En : "spraywater"
-				Name_Zh : "喷水"
+				Trigger_En : "spraywater"
+				Trigger_Zh : "喷水"
+				Para_En : "[time(tick) = 600]"
+				Para_Zh : "[时间(帧) = 600]"
+				Usage : "[时间]帧内, 你会喷水"
+			}
+			WormRain : 
+			{
+				Trigger_En : "wormrain"
+				Trigger_Zh : "蠕虫雨"
+				Para_En : "[time(tick) = 600]"
+				Para_Zh : "[时间(帧) = 600]"
+				Usage : "[时间]帧内, 蠕虫从天而降"
+			}
+			PlayerReforgeCost : 
+			{
+				Trigger_En : "myrefcost"
+				Trigger_Zh : "重铸花费"
+				Para_En : "[clear]"
+				Para_Zh : "[清除]"
+				Usage : "显示你总共花了多少钱重铸"
+			}
+			WorldReforgeCost : 
+			{
+				Trigger_En : "gtrefgain"
+				Trigger_Zh : "工匠收入"
+				Para_En : "[clear]"
+				Para_Zh : "[清除]"
+				Usage : "显示哥布林工匠总共从重铸中挣了多少钱"
+			}
+		}
+		ActionParameters : 
+		{
+			En : 
+			{
+				Trigger_En : "en"
+				Trigger_Zh : "英"
+				Usage : "以英文回应"
+			}
+			Zh : 
+			{
+				Trigger_En : "zh"
+				Trigger_Zh : "中"
+				Usage : "以中文回应"
+			}
+			Clear : 
+			{
+				Trigger_En : "clear"
+				Trigger_Zh : "清除"
+				Usage : "清除该功能对应的数据"
 			}
 		}
 	}
