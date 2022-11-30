@@ -20,7 +20,7 @@
 		{
 			Fun : 
 			{
-				Command : "乐"
+				Command : "fun"
 				Desc : "Show Fun Commands intro"
 				Usage : "/fun or /fun <action>"
 			}

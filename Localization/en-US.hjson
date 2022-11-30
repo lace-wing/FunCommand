@@ -6,12 +6,12 @@
 		{
 			About : 
 				'''
-				---
+				***
 				Fun Commands adds many fun chat commands
 				Most of them are just for fun
 				Report bugs as Steam workshop comments or GitHub issue
 				For the help list, use: /fun help
-				---
+				***
 				'''
 			SeeActions : "For the action list, use: /fun axns"
 			SeeTips : "For the tip list, use: /fun tips"
@@ -19,12 +19,22 @@
 			IsNotValid : "is not valid"
 			IsNotAValid : "is not a valid"
 
-			Int : "int"
+			Int : "integer"
 			Float : "float"
 			Action : "action"
 			Para : "parameter"
 
 			Range : "range"
+
+			Copper : "copper"
+			Silver : "silver"
+			Gold : "gold"
+			Platinum : "platinum"
+
+			IHaveSpent : "I have spent"
+			ToReforge : "to reforge"
+			TinkersHaveEarn : "The Goblin Tinkers have earned"
+			FromReforging : "from reforging"
 		}
 		Commands : 
 		{
@@ -39,54 +49,84 @@
 		{
 			Help : 
 			{
-				Name_En : "help"
-				Name_Zh : "帮助"
+				Trigger_En : "help"
+				Trigger_Zh : "帮助"
 				Usage : "(no parameter) show the help list"
 				HelpList : 
 					'''
-					---
+					***
 					For the action list, use: /fun axns
 					For the tip list, use: /fun tips
-					---
+					***
 					'''
 			}
 			Actions : 
 			{
-				Name_En : "axns"
-				Name_Zh : "功能"
+				Trigger_En : "axns"
+				Trigger_Zh : "功能"
 				Usage : "(no parameter) show the action list"
 				ActionList : 
 					'''
-					---
-					<action> ?/？ - show you how to use this action
+					***
+					<action>/<parameter> ?/？ - show you how to use this action/parameter
 					help/帮助 - show the help list
 					axns/功能 - show the action list
 					tips/提示 - show the tip list
 					spraywater/喷水 [time = 600] - your player will spray water for [time] ticks
-					---
+					wormrain/蠕虫雨 [time = 600] - worms will rain from the sky for [time] ticks
+					myrefcost/重铸花费 [clear/清除] - show how much your player has spent to reforge
+					gtrefgain/工匠收入 [clear/清除] - show how much the Goblin Tinkers have earned from reforging
+					***
 					'''
 			}
 			Tips : 
 			{
-				Name_En : "tips"
-				Name_Zh : "提示"
+				Trigger_En : "tips"
+				Trigger_Zh : "提示"
 				Usage : "(no parameter) show the tip list"
 				TipList : 
 					'''
-					---
+					***
 					1 second = 60 ticks
 					All commands start with a "/"
 					Fun Commands uses "/fun <action>" to invoke an action
 					"<x>" means you need to input a "x" without the "<>"
 					"[y = a]" means you can input a "y" without the "[]", the default value of y is a
-					---
+					***
 					'''
 			}
 			SprayWater : 
 			{
-				Name_En : "spraywater"
-				Name_Zh : "喷水"
+				Trigger_En : "spraywater"
+				Trigger_Zh : "喷水"
 				Usage : "[time(tick) = 600] your player will spray water for [time] ticks"
+			}
+			WormRain : 
+			{
+				Trigger_En : "wormrain"
+				Trigger_Zh : "蠕虫雨"
+				Usage : "[time = 600] worms will rain from the sky for [time] ticks"
+			}
+			PlayerReforgeCost : 
+			{
+				Trigger_En : "myrefcost"
+				Trigger_Zh : "重铸花费"
+				Usage : "[clear/清除] - show how much your player has spent to reforge"
+			}
+			WorldReforgeCost : 
+			{
+				Trigger_En : "gtrefgain"
+				Trigger_Zh : "工匠收入"
+				Usage : "[clear/清除] - show how much the Goblin Tinkers have earned from reforging"
+			}
+		}
+		ActionParameters : 
+		{
+			Clear : 
+			{
+				Trigger_En : "clear"
+				Trigger_Zh : "清除"
+				Usage : "clear datas corresponding to the action"
 			}
 		}
 	}

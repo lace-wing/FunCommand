@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria.ID;
+using static FunCommand.MiscUtil;
 
 namespace FunCommand.Commands
 {
@@ -13,10 +14,12 @@ namespace FunCommand.Commands
         public override string Command => CmdTextImdt("Fun.Command");
         public override string Description => CmdTextImdt("Fun.Desc");
         public override string Usage => CmdTextImdt("Fun.Usage");
+
         public override void Action(CommandCaller caller, string input, string[] args)
         {
             Player player = caller.Player;
-            player.TryGetModPlayer(out CommandPlayer mPlayer);
+            player.TryGetModPlayer(out ExecutionPlayer mPlayer);
+
             if (args.Length == 0)
             {
                 ShowAbout();
@@ -44,102 +47,154 @@ namespace FunCommand.Commands
                             break;
                     }
                 }
-                #region Help
-                if (DetermineAxn(determinant, "Help"))
+                string name = CheckAxn(determinant);
+
+                #region InvalidAction
+                if (name == ActionName[0])
                 {
-                    if (CheckUsage(para1, "Help")) ;
-                    else if (para1 != default)
+                    if (QueryAxn(para1, name))
                     {
-                        ReplyInvalidPara(para1);
+                        ReplyInvalidAction(determinant);
                     }
-                    else 
+                }
+                #endregion
+                #region Help
+                else if (name == ActionName[1])
+                {
+                    if (QueryAxn(para1, name))
                     {
-                        Main.NewText(AxnText("Help.HelpList"));
+                        if (para1 != default)
+                        {
+                            ReplyInvalidPara(para1);
+                        }
+                        else
+                        {
+                            Main.NewText(AxnText($"{name}.HelpList"), Colors.RarityYellow);
+                        }
                     }
                 }
                 #endregion
                 #region Actions
-                else if (DetermineAxn(determinant, "Actions"))
+                else if (name == ActionName[2])
                 {
-                    if (CheckUsage(para1, "Actions")) ;
-                    else if (para1 != default)
+                    if (QueryAxn(para1, name))
                     {
-                        ReplyInvalidPara(para1);
-                    }
-                    else
-                    {
-                        Main.NewText(AxnText("Actions.ActionList"));
+                        if (para1 != default)
+                        {
+                            ReplyInvalidPara(para1);
+                        }
+                        else
+                        {
+                            Main.NewText(AxnText($"{name}.ActionList"), Colors.RarityGreen);
+                        }
                     }
                 }
                 #endregion
                 #region Tips
-                else if (DetermineAxn(determinant, "Tips"))
+                else if (name == ActionName[3])
                 {
-                    if (CheckUsage(para1, "Tips")) ;
-                    else if (para1 != default)
+                    if (QueryAxn(para1, name))
                     {
-                        ReplyInvalidPara(para1);
-                    }
-                    else
-                    {
-                        Main.NewText(AxnText("Tips.TipList"));
+                        if (para1 != default)
+                        {
+                            ReplyInvalidPara(para1);
+                        }
+                        else
+                        {
+                            Main.NewText(AxnText($"{name}.TipList"), Colors.RarityBlue);
+                        }
                     }
                 }
                 #endregion
                 #region SprayWater
-                else if (DetermineAxn(determinant, "SprayWater"))
+                else if (name == ActionName[4])
                 {
-                    if (para1 == default)
+                    if (QueryAxn(para1, name))
                     {
-                        mPlayer.sprayWaterTimer = 600;
-                    }
-                    else if (CheckUsage(para1, "SprayWater")) ;
-                    else if (!int.TryParse(para1, out int time) || time < 0)
-                    {
-                        Main.NewText($"\"{para1}\" {ComText("IsNotAValid")} {ComText("Int")}, {ComText("Range")}: >=0", Colors.RarityRed);
-                    }
-                    else
-                    {
-                        mPlayer.sprayWaterTimer = time;
+                        if (para1 == default)
+                        {
+                            mPlayer.sprayWaterTimer = 600;
+                        }
+                        else if (!int.TryParse(para1, out int time) || time < 0)
+                        {
+                            Main.NewText($"\"{para1}\" {ComText("IsNotAValid")} {ComText("Int")}, {ComText("Range")}: >=0", Colors.RarityRed);
+                        }
+                        else
+                        {
+                            mPlayer.sprayWaterTimer = time;
+                        }
                     }
                 }
                 #endregion
-                #region Invalid Action
-                else
+                #region Worm Rain
+                else if (name == ActionName[5])
                 {
-                    ReplyInvalidAction(determinant);
+                    if (QueryAxn(para1, name))
+                    {
+                        if (para1 == default)
+                        {
+                            mPlayer.wormRainRimer = 600;
+                        }
+                        else if (!int.TryParse(para1, out int time) || time < 0)
+                        {
+                            Main.NewText($"\"{para1}\" {ComText("IsNotAValid")} {ComText("Int")}, {ComText("Range")}: >=0", Colors.RarityRed);
+                        }
+                        else
+                        {
+                            mPlayer.wormRainRimer = time;
+                        }
+                    }
+                }
+                #endregion
+                #region Player Reforge Cost
+                else if (name == ActionName[6])
+                {
+                    if (QueryAxn(para1, name))
+                    {
+                        if (ParaTrig("Clear").Contains(para1))
+                        {
+                            if (QueryPara(para2, "Clear"))
+                            {
+                                mPlayer.playerReforgeCost = 0;
+                            }
+                        }
+                        else if (para1 != default)
+                        {
+                            ReplyInvalidPara(para1);
+                        }
+                        else
+                        {
+                            int[] count = CuToSci(mPlayer.playerReforgeCost);
+                            Main.NewText($"{ComText("IHaveSpent")} {count[0]} {ComText("Platinum")} {count[1]} {ComText("Gold")} {count[2]} {ComText("Silver")} {count[3]} {ComText("Copper")} {ComText("ToReforge")}");
+                        }
+                    }
+                }
+                #endregion
+                #region WorldReforgeCost
+                else if (name == ActionName[7])
+                {
+                    if (QueryAxn(para1, name))
+                    {
+                        if (ParaTrig("Clear").Contains(para1))
+                        {
+                            if (QueryPara(para2, "Clear"))
+                            {
+                                ExecutionSystem.Instance.worldReforgeCost = 0;
+                            }
+                        }
+                        else if (para1 != default)
+                        {
+                            ReplyInvalidPara(para1);
+                        }
+                        else
+                        {
+                            int[] count = CuToSci(ExecutionSystem.Instance.worldReforgeCost);
+                            Main.NewText($"{ComText("TinkersHaveEarn")} {count[0]} {ComText("Platinum")} {count[1]} {ComText("Gold")} {count[2]} {ComText("Silver")} {count[3]} {ComText("Copper")} {ComText("FromReforging")}");
+                        }
+                    }
                 }
                 #endregion
             }
-        }
-        private bool DetermineAxn(string determinant, string name)
-        {
-            return determinant.ToLower() == AxnText($"{name}.Name_En") || determinant == AxnText($"{name}.Name_Zh");
-        }
-        private bool CheckUsage(string para, string name)
-        {
-            bool check = para == "?" || para == "？";
-            if (check)
-            {
-                ShowUsage(name);
-            }
-            return check;
-        }
-        private void ShowAbout()
-        {
-            Main.NewText(ComText("About"), Colors.RarityYellow);
-        }
-        private void ShowUsage(string name)
-        {
-            Main.NewText(AxnText($"{name}.Usage"), Colors.RarityYellow);
-        }
-        private void ReplyInvalidAction(string action)
-        {
-            Main.NewText($"\"{action}\" {ComText("IsNotAValid")} {ComText("Action")}. {ComText("SeeActions")}", Colors.RarityRed);
-        }
-        private void ReplyInvalidPara(string para)
-        {
-            Main.NewText($"\"{para}\" {ComText("IsNotAValid")} {ComText("Para")}. {ComText("SeeActions")}", Colors.RarityRed);
         }
     }
 }
