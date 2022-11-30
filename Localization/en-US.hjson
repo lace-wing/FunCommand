@@ -6,12 +6,12 @@
 		{
 			About : 
 				'''
-				***
+				*** *** ***
 				Fun Commands adds many fun chat commands
 				Most of them are just for fun
 				Report bugs as Steam workshop comments or GitHub issue
 				For the help list, use: /fun help
-				***
+				*** *** ***
 				'''
 			SeeActions : "For the action list, use: /fun axns"
 			SeeTips : "For the tip list, use: /fun tips"
@@ -68,10 +68,10 @@
 				Usage : "display the help list"
 				HelpList : 
 					'''
-					***
+					*** *** ***
 					For the action list, use: /fun axns
 					For the tip list, use: /fun tips
-					***
+					*** *** ***
 					'''
 			}
 			Actions : 
@@ -91,14 +91,14 @@
 				Usage : "display the tip list"
 				TipList : 
 					'''
-					***
+					*** *** ***
 					1 second = 60 ticks
 					All commands start with a "/"
 					Fun Commands uses "/fun <action> [parameter]" to invoke an action
 					Add a "?" after an action or parameter to query about it
 					"<x>" means you need to input a "x" without the "<>"
 					"[y = a]" means you can input a "y" without the "[]", the default value of y is a
-					***
+					*** *** ***
 					'''
 			}
 			SprayWater : 
@@ -111,7 +111,7 @@
 			}
 			WormRain : 
 			{
-				Trigger_En : "wormrain"
+				Trigger_En : "worms"
 				Trigger_Zh : "蠕虫雨"
 				Para_En : "[time(tick) = 600]"
 				Para_Zh : "[时间(帧) = 600]"

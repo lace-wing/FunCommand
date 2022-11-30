@@ -29,8 +29,8 @@ namespace FunCommand
         public static int[] wormWeight = new int[]
         {
             6, 4,
-            10, 10,
-            8, 7,
+            12, 10,
+            7, 5,
             4,
             2,
             1, 1

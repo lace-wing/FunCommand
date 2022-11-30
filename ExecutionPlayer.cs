@@ -37,13 +37,18 @@ namespace FunCommand
                     Projectile water = Projectile.NewProjectileDirect(Player.GetSource_Misc("SprayWater"), Player.MountedCenter + new Vector2(0, 4), vel, ProjectileID.WaterGun, 0, 0);
                 }
             }
-            if (wormRainRimer > 0 && wormRainRimer % 120 == 0 && Main.myPlayer == Player.whoAmI)
+            if (wormRainRimer > 0 && wormRainRimer % 180 == 0 && Main.myPlayer == Player.whoAmI && Main.npc.Count(a => a is NPC npc && npc.active) < 120)
             {
-                NPC[] worm = SpawnUtil.SpawnNPCBatch(Player.GetSource_Misc("WormRain"), sky, default, FunCommand.wormRainPool);
-                foreach (NPC npc in worm)
+                Task task = new Task(() =>
                 {
-                    ExecutionNPC.worms.Add(npc);
-                }
+                    NPC[] worm = SpawnUtil.SpawnNPCBatch(Player.GetSource_Misc("WormRain"), sky, default, FunCommand.wormRainPool);
+                    foreach (NPC npc in worm)
+                    {
+                        ExecutionNPC.worms.Add(npc);
+                    }
+                });
+                task.Start();
+
             }
         }
         public override void SaveData(TagCompound tag)

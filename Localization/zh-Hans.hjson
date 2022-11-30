@@ -6,12 +6,12 @@
 		{
 			About : 
 				'''
-				***
+				*** *** ***
 				乐子指令 (Fun Commands) 加入了一些有趣的聊天指令 (在聊天框输入的指令)
 				大部分只是为了好玩
 				在创意工坊留言或创建 GitHub issue 来反馈bug
 				帮助列表: /fun help
-				***
+				*** *** ***
 				'''
 			SeeActions : "功能列表详见: /fun axns"
 			SeeTips : "提示列表详见: /fun tips"
@@ -68,10 +68,10 @@
 				Usage : "显示帮助列表"
 				HelpList : 
 					'''
-					***
+					*** *** *** 
 					功能列表详见: /fun axns
 					提示列表详见: /fun tips
-					***
+					*** *** ***
 					'''
 			}
 			Actions : 
@@ -91,14 +91,14 @@
 				Usage : "显示提示列表"
 				TipList : 
 					'''
-					***
+					*** *** ***
 					1秒 = 60帧
 					所有指令以 "/" 开头
 					乐子指令用 "/fun <功能> [变量]" 来调用功能
 					在功能或变量后面加上一个 "？" 变量以查询
 					"<x>" 指你需要输入一个 "x" (不带 "<>")
 					"[y = a]" 指你可以输入一个 "y" (不带 "[]"), y默认为a
-					***
+					*** *** ***
 					'''
 			}
 			SprayWater : 
@@ -111,7 +111,7 @@
 			}
 			WormRain : 
 			{
-				Trigger_En : "wormrain"
+				Trigger_En : "worms"
 				Trigger_Zh : "蠕虫雨"
 				Para_En : "[time(tick) = 600]"
 				Para_Zh : "[时间(帧) = 600]"

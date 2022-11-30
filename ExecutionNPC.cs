@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Terraria.ID;
+using Terraria.GameContent.ItemDropRules;
+using Terraria.GameContent.UI;
 
 namespace FunCommand
 {
@@ -37,10 +39,26 @@ namespace FunCommand
                     npc.velocity.Y += 3;
                 }
                 npc.AddBuff(BuffID.Lovestruck, 2);
+                if (spawnTimer == 30)
+                {
+                    EmoteBubble.NewBubble(EmoteID.BossEoW, new WorldUIAnchor(npc), 120);
+                }
+
             }
         }
         public override void DrawEffects(NPC npc, ref Color drawColor)
         {
+        }
+        public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
+        {
+            if (worms.Contains(npc))
+            {
+                if (Main.hardMode)
+                {
+                    npcLoot.RemoveWhere(rule => rule is CommonDropNotScalingWithLuck drop && drop.itemId == ItemID.CursedFlame); //TODO Check drop rule
+                }
+
+            }
         }
     }
 }
