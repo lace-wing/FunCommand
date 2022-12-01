@@ -14,6 +14,29 @@ namespace FunCommand
 
         public int worldReforgeCost;
 
+        public static List<NPC> worms = new List<NPC>();
+        public int shouldKillWorms = 0;
+
+        public override void PostUpdateNPCs()
+        {
+            Predicate<NPC> npcToRemove = npc => npc == null || !npc.active;
+            worms.RemoveAll(npcToRemove);
+            foreach (Player player in Main.player)
+            {
+                if (player.active)
+                {
+                    shouldKillWorms += player.GetModPlayer<ExecutionPlayer>().wormRainRimer <= 0 ? 1 : 0;
+                }
+            }
+            if (shouldKillWorms > 0)
+            {
+                worms.ForEach(npc =>
+                {
+                    npc.active = false;
+                });
+                shouldKillWorms = 0;
+            }
+        }
         public override void OnWorldLoad()
         {
             worldReforgeCost = 0;

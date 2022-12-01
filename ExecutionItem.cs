@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.Localization;
 
 namespace FunCommand
 {
@@ -12,6 +15,7 @@ namespace FunCommand
 
         public bool checkReforge;
         public int reforgeCost;
+        bool bestiaryNotesAdded = false;
         public override bool PreReforge(Item item)
         {
             reforgeCost = MiscUtil.GetReforgePrice(item);
@@ -29,6 +33,27 @@ namespace FunCommand
             checkReforge = false;
             reforgeCost = 0;
             base.PostReforge(item);
+        }
+        public override void OnSpawn(Item item, IEntitySource source)
+        {
+            if (!Main.hardMode)
+            {
+                if (ExecutionSystem.worms.Count > 0)
+                {
+                    if (item.type == ItemID.CursedFlame && source is EntitySource_Loot loot && loot.Entity is NPC npc && npc.type == NPCID.SeekerHead)
+                    {
+                        item.active = false;
+                    }
+                }
+            }
+        }
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
+        {
+            if (item.type == ItemID.CursedFlame && !bestiaryNotesAdded)
+            {
+                item.BestiaryNotes += $"\n{ComText("WormRainHardmodeCondition")}";
+                bestiaryNotesAdded = true;
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Terraria.ID;
 using Terraria.GameContent.ItemDropRules;
 using Terraria.GameContent.UI;
+using FunCommand.Items;
 
 namespace FunCommand
 {
@@ -14,14 +15,11 @@ namespace FunCommand
     {
         public override bool InstancePerEntity => true;
 
-        public static List<NPC> worms = new List<NPC>();
         public int spawnTimer;
 
         public override void ResetEffects(NPC npc)
         {
-            Predicate<NPC> npcToRemove = npc => npc == null || !npc.active;
-            worms.RemoveAll(npcToRemove);
-            if (worms.Contains(npc))
+            if (ExecutionSystem.worms.Contains(npc))
             {
                 spawnTimer = Math.Max(++spawnTimer, 0); ;
             }
@@ -32,18 +30,18 @@ namespace FunCommand
         }
         public override void PostAI(NPC npc)
         {
-            if (worms.Contains(npc))
+            if (ExecutionSystem.worms.Contains(npc))
             {
-                if (spawnTimer < 4)
+                if (spawnTimer < 12)
                 {
                     npc.velocity.Y += 3;
+                    npc.velocity.X *= 0.33f;
                 }
-                npc.AddBuff(BuffID.Lovestruck, 2);
                 if (spawnTimer == 30)
                 {
+                    npc.AddBuff(BuffID.Lovestruck, 150);
                     EmoteBubble.NewBubble(EmoteID.BossEoW, new WorldUIAnchor(npc), 120);
                 }
-
             }
         }
         public override void DrawEffects(NPC npc, ref Color drawColor)
@@ -51,14 +49,27 @@ namespace FunCommand
         }
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
-            if (worms.Contains(npc))
-            {
-                if (Main.hardMode)
-                {
-                    npcLoot.RemoveWhere(rule => rule is CommonDropNotScalingWithLuck drop && drop.itemId == ItemID.CursedFlame); //TODO Check drop rule
-                }
-
-            }
+            //if (npc.type == NPCID.SeekerHead)
+            //{
+            //    List<IItemDropRule> rules = new List<IItemDropRule>();
+            //    npcLoot.RemoveWhere(rule => 
+            //    {
+            //        if (rule is CommonDrop drop && drop.itemId == ItemID.CursedFlame)
+            //        {
+            //            rules.Add(rule);
+            //            return true;
+            //        }
+            //        return false;
+            //    });
+            //    IItemDropRuleCondition condition = new WormRainHardmodeCondition();
+            //    rules.ForEach(action => 
+            //    {
+            //        if (action is CommonDrop drop)
+            //        {
+            //            npcLoot.Add(ItemDropRule.ByCondition(condition, drop.itemId, drop.chanceDenominator, drop.amountDroppedMinimum, drop.amountDroppedMaximum, drop.chanceNumerator));
+            //        }
+            //    });
+            //}
         }
     }
 }

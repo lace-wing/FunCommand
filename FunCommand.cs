@@ -24,7 +24,7 @@ namespace FunCommand
             // Normal worms
             NPCID.Worm, NPCID.EnchantedNightcrawler, 
             // Treasure worms
-            NPCID.GoldWorm, NPCID.TruffleWormDigger
+            NPCID.GoldWorm, NPCID.TruffleWorm
         };
         public static int[] wormWeight = new int[]
         {
@@ -32,7 +32,8 @@ namespace FunCommand
             12, 10,
             7, 5,
             4,
-            2,
+            1,
+            3, 2, 
             1, 1
         };
 
@@ -46,7 +47,7 @@ namespace FunCommand
             wormRainPool.type = wormType;
             wormRainPool.weight = wormWeight;
             wormRainPool.randomType = true;
-            wormRainPool.totalType = 3;
+            wormRainPool.totalType = 1;
             for (int i = 0; i < wormRainPool.length; i++)
             {
                 wormRainPool.ignoreTile[i] = true;

@@ -39,6 +39,7 @@
 			ToReforge : "to reforge"
 			TinkersHaveEarn : "The Goblin Tinkers have earned"
 			FromReforging : "from reforging"
+			WormRainHardmodeCondition : "Will not be dropped during pre-hardmode Worm Rains"
 		}
 		Commands : 
 		{

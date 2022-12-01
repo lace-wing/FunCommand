@@ -39,6 +39,7 @@
 			ToReforge : "来重铸"
 			TinkersHaveEarn : "哥布林工匠已经从重铸中挣了"
 			FromReforging : ""
+			WormRainHardmodeCondition : "不会在肉山前的蠕虫雨中掉落"
 		}
 		Commands : 
 		{
