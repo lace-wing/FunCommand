@@ -40,6 +40,9 @@
 			TinkersHaveEarn : "The Goblin Tinkers have earned"
 			FromReforging : "from reforging"
 			WormRainHardmodeCondition : "Will not be dropped during pre-hardmode Worm Rains"
+			DefeatAllMechBossesFirst : "You have to defeat all the mech bosses first"
+			PlanteraAlive : "Plantera is already there"
+			SummoningPlantera : "Summoning Plantera"
 		}
 		Commands : 
 		{
@@ -87,8 +90,8 @@
 			{
 				Trigger_En : "tips"
 				Trigger_Zh : "提示"
-				Para_En : "[en/zh]"
-				Para_Zh : "[英/中]"
+				Para_En : "(no parameter)"
+				Para_Zh : "(无变量)"
 				Usage : "display the tip list"
 				TipList : 
 					'''
@@ -97,6 +100,7 @@
 					All commands start with a "/"
 					Fun Commands uses "/fun <action> [parameter]" to invoke an action
 					Add a "?" after an action or parameter to query about it
+					Add "en" or "zh" after a "?" to specify language of the action and the parameters
 					"<x>" means you need to input a "x" without the "<>"
 					"[y = a]" means you can input a "y" without the "[]", the default value of y is a
 					*** *** ***
@@ -133,6 +137,30 @@
 				Para_En : "[clear]"
 				Para_Zh : "[清除]"
 				Usage : "display how much the Goblin Tinkers have earned from reforging"
+			}
+			FullOfLove : 
+			{
+				Trigger_En : "loved"
+				Trigger_Zh : "充满爱"
+				Para_En : "[time(tick) = 600]"
+				Para_Zh : "[时间(帧) = 600]"
+				Usage : "fill the world with love"
+			}
+			Pink : 
+			{
+				Trigger_En : "pink"
+				Trigger_Zh : "粉色"
+				Para_En : "[time(tick) = 600]"
+				Para_Zh : "[时间(帧) = 600]"
+				Usage : "dye the things with pink"
+			}
+			Plantera : 
+			{
+				Trigger_En : "plantera"
+				Trigger_Zh : "世纪小花"
+				Para_En : "(no parameter)"
+				Para_Zh : "(无变量)"
+				Usage : "summon a stronger Plantera if all the mech bosses have been defeated"
 			}
 		}
 		ActionParameters : 

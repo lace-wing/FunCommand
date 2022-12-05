@@ -40,6 +40,9 @@
 			TinkersHaveEarn : "哥布林工匠已经从重铸中挣了"
 			FromReforging : ""
 			WormRainHardmodeCondition : "不会在肉山前的蠕虫雨中掉落"
+			DefeatAllMechBossesFirst : "你必须先打败所有机械boss"
+			PlanteraAlive : "世纪之花已经在那了"
+			SummoningPlantera : "正在召唤世纪之花"
 		}
 		Commands : 
 		{
@@ -97,6 +100,7 @@
 					所有指令以 "/" 开头
 					乐子指令用 "/fun <功能> [变量]" 来调用功能
 					在功能或变量后面加上一个 "？" 变量以查询
+					在查询符号后加上"en/英"或"zh/中"以指定功能和变量的语言
 					"<x>" 指你需要输入一个 "x" (不带 "<>")
 					"[y = a]" 指你可以输入一个 "y" (不带 "[]"), y默认为a
 					*** *** ***
@@ -133,6 +137,30 @@
 				Para_En : "[clear]"
 				Para_Zh : "[清除]"
 				Usage : "显示哥布林工匠总共从重铸中挣了多少钱"
+			}
+			FullOfLove : 
+			{
+				Trigger_En : "loved"
+				Trigger_Zh : "充满爱"
+				Para_En : "[time(tick) = 600]"
+				Para_Zh : "[时间(帧) = 600]"
+				Usage : "让世界充满爱"
+			}
+			Pink : 
+			{
+				Trigger_En : "pink"
+				Trigger_Zh : "粉色"
+				Para_En : "[time(tick) = 600]"
+				Para_Zh : "[时间(帧) = 600]"
+				Usage : "将事物染上粉色"
+			}
+			Plantera : 
+			{
+				Trigger_En : "plantera"
+				Trigger_Zh : "世纪小花"
+				Para_En : "(no parameter)"
+				Para_Zh : "(无变量)"
+				Usage : "若所有机械boss已被打败, 召唤一个更强力的世纪之花"
 			}
 		}
 		ActionParameters : 

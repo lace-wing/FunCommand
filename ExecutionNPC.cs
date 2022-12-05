@@ -28,6 +28,14 @@ namespace FunCommand
                 spawnTimer = 0;
             }
         }
+        public override bool PreAI(NPC npc)
+        {
+            if (npc.type == NPCID.Plantera)
+            {
+                ExecutionSystem.Instance.planteraAlive = true;
+            }
+            return base.PreAI(npc);
+        }
         public override void PostAI(NPC npc)
         {
             if (ExecutionSystem.worms.Contains(npc))
@@ -43,9 +51,36 @@ namespace FunCommand
                     EmoteBubble.NewBubble(EmoteID.BossEoW, new WorldUIAnchor(npc), 120);
                 }
             }
+            if (ExecutionSystem.Instance.fullOfLoveTimer > 0)
+            {
+                if (ExecutionSystem.Instance.fullOfLoveTimer % 120 == 0 && Main.rand.NextBool(6))
+                {
+                    EmoteBubble.NewBubble(EmoteID.EmotionLove, new WorldUIAnchor(npc), 120);
+                }
+                if (npc.FindBuffIndex(BuffID.Lovestruck) < -1)
+                {
+                    npc.buffTime[npc.FindBuffIndex(BuffID.Lovestruck)] += 1;
+                }
+                else npc.AddBuff(BuffID.Lovestruck, 2);
+            }
         }
-        public override void DrawEffects(NPC npc, ref Color drawColor)
+        public override void ModifyHitPlayer(NPC npc, Player target, ref int damage, ref bool crit)
         {
+            if (ExecutionSystem.Instance.fullOfLoveTimer < 0)
+            {
+                damage = (int)(damage * 0.75f);
+                crit = crit && Main.rand.NextBool();
+            }
+        }
+        public override Color? GetAlpha(NPC npc, Color drawColor)
+        {
+            if (ExecutionSystem.Instance.pinkTimer > 0)
+            {
+                drawColor.R = 255;
+                drawColor.G = 192;
+                drawColor.B = 203;
+            }
+            return drawColor;
         }
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {

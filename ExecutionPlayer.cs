@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria.DataStructures;
+using Terraria.GameContent.UI;
 using Terraria.ID;
 using Terraria.ModLoader.IO;
 
@@ -51,6 +53,29 @@ namespace FunCommand
                     }
                 });
                 task.Start();
+            }
+            if (ExecutionSystem.Instance.fullOfLoveTimer > 0)
+            {
+                Player.GetDamage(DamageClass.Generic) *= 0.5f;
+                Player.GetCritChance(DamageClass.Generic) *= 0.5f;
+                if (ExecutionSystem.Instance.fullOfLoveTimer % 120 == 0 && Main.rand.NextBool(5))
+                {
+                    EmoteBubble.NewBubble(EmoteID.EmotionLove, new WorldUIAnchor(Player), 120);
+                }
+                if (Player.FindBuffIndex(BuffID.Lovestruck) < -1)
+                {
+                    Player.buffTime[Player.FindBuffIndex(BuffID.Lovestruck)] += 1;
+                }
+                else Player.AddBuff(BuffID.Lovestruck, 2);
+            }
+        }
+        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
+        {
+            if (ExecutionSystem.Instance.pinkTimer > 0)
+            {
+                r = 255;
+                g = 192;
+                b = 203;
             }
         }
         public override void SaveData(TagCompound tag)

@@ -28,8 +28,11 @@ namespace FunCommand
             "Tips",
             "SprayWater",
             "WormRain",
-            "PlayerReforgeCost", 
-            "WorldReforgeCost"
+            "PlayerReforgeCost",
+            "WorldReforgeCost", 
+            "FullOfLove", 
+            "Pink", 
+            "Plantera"
         };
 
         /// <summary>
