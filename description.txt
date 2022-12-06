@@ -1,1 +1,5 @@
-Fun Commands is a pretty cool mod, it does...this. Modify this file with a description of your mod.
+﻿Fun Commands is a just-for-fun mod, it adds some chat commands which might be funny or useful.
+
+Type "/fun" in chat and press Enter to start.
+
+Open-source on GitHub: https://github.com/lyc-Lacewing/FunCommand but the codes are quite shit ah nvm
