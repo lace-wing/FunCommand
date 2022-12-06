@@ -66,17 +66,40 @@ namespace FunCommand
             {
                 for (int i = 0; i < planteraTimer; i++)
                 {
-                    if (Main.rand.NextBool())
+                    if (Main.rand.NextBool(9))
                     {
-                        Dust dust = Dust.NewDustPerfect(planteraSpawnPos, DustID.AncientLight, Vector2.One.RotatedBy(i) * Main.rand.NextFloat(0.9f, 4.8f), 0, Color.DarkGreen);
+                        Dust dust = Dust.NewDustPerfect(planteraSpawnPos, DustID.AncientLight, Vector2.One.RotatedBy(i) * Main.rand.NextFloat(1.6f, 6.4f), 0, Color.DarkGreen);
                         dust.noGravity = true;
                     }
+                }
+                if (planteraTimer < 240 && planteraTimer % 24 == 0)
+                {
+                    int id = Main.rand.Next(ProjectileID.SporeGas, ProjectileID.SporeGas3);
+                    Projectile proj = Projectile.NewProjectileDirect(Projectile.GetSource_None(), planteraSpawnPos + Vector2.One.RotatedByRandom(MathHelper.TwoPi) * Main.rand.NextFloat(12, 120), Vector2.One.RotatedByRandom(MathHelper.TwoPi) * Main.rand.NextFloat(0.2f, 0.8f), id, 12, 12);
+                    proj.timeLeft = planteraTimer + 180;
+                    proj.friendly = false;
+                    proj.hostile = true;
                 }
                 if (planteraTimer == 1)
                 {
                     for (int i = 0; i < 128; i++)
                     {
-                        Dust dust = Dust.NewDustPerfect(planteraSpawnPos, DustID.AncientLight, Vector2.One.RotatedBy(i) * Main.rand.NextFloat(16f, 48f), 0, Color.DarkGreen, 6);
+                        Dust dust = Dust.NewDustPerfect(planteraSpawnPos, DustID.AncientLight, Vector2.One.RotatedBy(i) * Main.rand.NextFloat(16f, 48f), 0, Color.DarkGreen, 3);
+                        dust.noGravity = true;
+                    }
+                    for (int i = 0; i < 64; i++)
+                    {
+                        Dust dust = Dust.NewDustPerfect(planteraSpawnPos, DustID.AncientLight, Vector2.One.RotatedBy(i) * Main.rand.NextFloat(12f, 36f), 0, Color.DarkGreen, 6);
+                        dust.noGravity = true;
+                    }
+                    for (int i = 0; i < 32; i++)
+                    {
+                        Dust dust = Dust.NewDustPerfect(planteraSpawnPos, DustID.AncientLight, Vector2.One.RotatedBy(i) * Main.rand.NextFloat(8f, 24f), 0, Color.DarkGreen, 9);
+                        dust.noGravity = true;
+                    }
+                    for (int i = 0; i < 16; i++)
+                    {
+                        Dust dust = Dust.NewDustPerfect(planteraSpawnPos, DustID.AncientLight, Vector2.One.RotatedBy(i) * Main.rand.NextFloat(4f, 12f), 0, Color.HotPink, 9);
                         dust.noGravity = true;
                     }
                     NPC plantera = NPC.NewNPCDirect(NPC.GetBossSpawnSource(planteraTarget), planteraSpawnPos, NPCID.Plantera, target: planteraTarget);

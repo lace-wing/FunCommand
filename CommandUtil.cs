@@ -34,6 +34,20 @@ namespace FunCommand
             "Pink", 
             "Plantera"
         };
+        public static string[][] QueriablePara = new string[][]
+        {
+            new string[0], 
+            new string[0], 
+            new string[]{"En", "Zh"},
+            new string[0], 
+            new string[0], 
+            new string[0], 
+            new string[]{"Clear"}, 
+            new string[]{"Clear"}, 
+            new string[0], 
+            new string[0], 
+            new string[0], 
+        };
 
         /// <summary>
         /// </summary>
@@ -114,7 +128,7 @@ namespace FunCommand
         /// <summary>
         /// Check what action it is
         /// </summary>
-        /// <param name="determinant"></param>
+        /// <param name="determinant">The text to trigger an action</param>
         /// <returns>Name of the action triggered by the determinant</returns>
         public static string CheckAxn(string determinant)
         {
@@ -138,30 +152,49 @@ namespace FunCommand
         /// </summary>
         /// <param name="para"></param>
         /// <param name="name"></param>
+        /// <param name="lang"></param>
         /// <returns></returns>
         public static bool QueryAxn(string para, string name, string lang = default)
         {
-            bool go = true;
             bool en = true, zh = true;
             if (para == "?" || para == "？")
             {
                 if (QueryLang(lang, out en, out zh))
                 {
                     Main.NewText(AxnUsage(name, en, zh), Colors.RarityYellow);
+                    return false;
                 }
-                go = false;
             }
-            return go;
+            return true;
         }
-        public static bool QueryPara(string para, string name)
+        /// <summary>
+        /// Check if the parameter is queried and show Usage if yes, returns true if not
+        /// </summary>
+        /// <param name="para">The queried parameter</param>
+        /// <param name="query">The querying parameter</param>
+        /// <param name="names">The queriable para names</param>
+        /// <param name="lang">language specifier</param>
+        /// <returns></returns>
+        public static bool QueryPara(string para, string query, string[] names, string lang = default)
         {
-            bool go = true;
-            if (para == "?" || para == "？")
+            bool en = true, zh = true;
+            if (query == "?" || query == "？")
             {
-                Main.NewText(ParaText($"{name}.Usage"));
-                return !go;
+                foreach (string name in names)
+                {
+                    if (ParaTrig(name).Contains(para.ToLower()))
+                    {
+                        if (QueryLang(lang, out en, out zh))
+                        {
+                            Main.NewText(ParaUsage(name, en, zh), Colors.RarityYellow);
+                            return false;
+                        }
+                    }
+                }
+                Main.NewText($"{para} {ComText("IsNotAQueriable")} {ComText("Para")}", Colors.RarityRed);
+                return false;
             }
-            return go;
+            return true;
         }
         /// <summary>
         /// Check if the lang triggers En or Zh, triggers both when lang = default
@@ -199,7 +232,7 @@ namespace FunCommand
         }
         public static string AxnUsage(string name, bool en = true, bool zh = true)
         {
-            string trigger = "" , para = "", usage = AxnText(name + ".Usage"), result = "";
+            string trigger = "", para = "", usage = AxnText(name + ".Usage");
             if (en)
             {
                 trigger += AxnTrig(name)[0];
@@ -215,8 +248,24 @@ namespace FunCommand
                 trigger += AxnTrig(name)[1];
                 para += AxnPara(name)[1];
             }
-            result = $"{trigger} {para} - {usage}";
-            return result;
+            return $"{trigger} {para} - {usage}";
+        }
+        public static string ParaUsage(string name, bool en = true, bool zh = true)
+        {
+            string trigger = "", usage = ParaText(name + ".Usage");
+            if (en)
+            {
+                trigger += ParaTrig(name)[0];
+            }
+            if (en && zh)
+            {
+                trigger += "/";
+            }
+            if (zh)
+            {
+                trigger += ParaTrig(name)[1];
+            }
+            return $"{trigger} - {usage}";
         }
         public static void ReplyInvalidAction(string action)
         {

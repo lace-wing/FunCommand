@@ -20,6 +20,8 @@
 			IsNotAValid : "is not a valid"
 			IsNotSupported : "is not supported"
 			IsNotASupported : "is not a supported"
+			IsNotQueriable : "is not queriable"
+			IsNotAQueriable : "is not a queriable"
 
 			Language : "language"
 
@@ -100,7 +102,6 @@
 					All commands start with a "/"
 					Fun Commands uses "/fun <action> [parameter]" to invoke an action
 					Add a "?" after an action or parameter to query about it
-					Add "en" or "zh" after a "?" to specify language of the action and the parameters
 					"<x>" means you need to input a "x" without the "<>"
 					"[y = a]" means you can input a "y" without the "[]", the default value of y is a
 					*** *** ***
@@ -169,13 +170,13 @@
 			{
 				Trigger_En : "en"
 				Trigger_Zh : "英"
-				Usage : "the action will respond in English"
+				Usage : "specify the language of the action or parameter displayed as English"
 			}
 			Zh : 
 			{
 				Trigger_En : "zh"
 				Trigger_Zh : "中"
-				Usage : "the action will respond in Chinese"
+				Usage : "specify the language of the action or parameter displayed as Chinese"
 			}
 			Clear : 
 			{

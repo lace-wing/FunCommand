@@ -20,6 +20,8 @@
 			IsNotAValid : "不是一个有效的"
 			IsNotSupported : "不受支持"
 			IsNotASupported : "不是一个受支持的"
+			IsNotQueriable : "不可查询"
+			IsNotAQueriable : "不是一个可查询的"
 
 			Language : "语言"
 
@@ -100,7 +102,6 @@
 					所有指令以 "/" 开头
 					乐子指令用 "/fun <功能> [变量]" 来调用功能
 					在功能或变量后面加上一个 "？" 变量以查询
-					在查询符号后加上"en/英"或"zh/中"以指定功能和变量的语言
 					"<x>" 指你需要输入一个 "x" (不带 "<>")
 					"[y = a]" 指你可以输入一个 "y" (不带 "[]"), y默认为a
 					*** *** ***
@@ -169,13 +170,13 @@
 			{
 				Trigger_En : "en"
 				Trigger_Zh : "英"
-				Usage : "以英文回应"
+				Usage : "将功能或变量显示的语言指定为英文"
 			}
 			Zh : 
 			{
 				Trigger_En : "zh"
 				Trigger_Zh : "中"
-				Usage : "以中文回应"
+				Usage : "将功能或变量显示的语言指定为中文"
 			}
 			Clear : 
 			{

@@ -78,23 +78,26 @@ namespace FunCommand.Commands
                 {
                     if (QueryAxn(para1, name, para2))
                     {
-                        int batches = ActionName.Length / 10 + 1;
-                        string axnList, warp;
-                        Main.NewText("***");
-                        if (QueryLang(para1, out bool en, out bool zh))
+                        if (QueryPara(para1, para2, QueriablePara[2], para3))
                         {
-                            for (int b = 0; b < batches; b++)
+                            int batches = ActionName.Length / 10 + 1;
+                            string axnList, warp;
+                            Main.NewText("***");
+                            if (QueryLang(para1, out bool en, out bool zh))
                             {
-                                axnList = "";
-                                for (int i = b * 10; i < ActionName.Length && i < b * 10 + 10; i++)
+                                for (int b = 0; b < batches; b++)
                                 {
-                                    warp = i == 0 ? "" : "\n";
-                                    axnList += $"{warp}{AxnUsage(ActionName[i], en, zh)}";
+                                    axnList = "";
+                                    for (int i = b * 10; i < ActionName.Length && i < b * 10 + 10; i++)
+                                    {
+                                        warp = i == 0 ? "" : "\n";
+                                        axnList += $"{warp}{AxnUsage(ActionName[i], en, zh)}";
+                                    }
+                                    Main.NewText(axnList, Colors.RarityGreen);
                                 }
-                                Main.NewText(axnList, Colors.RarityGreen);
                             }
+                            Main.NewText("***");
                         }
-                        Main.NewText("***");
                     }
                 }
                 #endregion
@@ -157,23 +160,21 @@ namespace FunCommand.Commands
                 {
                     if (QueryAxn(para1, name, para2))
                     {
-                        if (ParaTrig("Clear").Contains(para1))
+                        if (QueryPara(para1, para2, QueriablePara[6], para3))
                         {
-                            if (QueryPara(para2, "Clear"))
+                            if (ParaTrig("Clear").Contains(para1))
                             {
                                 mPlayer.playerReforgeCost = 0;
-                                return;
                             }
-                        }
-                        else if (para1 != default)
-                        {
-                            ReplyInvalidPara(para1);
-                            return;
-                        }
-                        else
-                        {
-                            int[] count = CuToSci(mPlayer.playerReforgeCost);
-                            Main.NewText($"{ComText("IHaveSpent")} {count[0]} {ComText("Platinum")} {count[1]} {ComText("Gold")} {count[2]} {ComText("Silver")} {count[3]} {ComText("Copper")} {ComText("ToReforge")}");
+                            else if (para1 != default)
+                            {
+                                ReplyInvalidPara(para1);
+                            }
+                            else
+                            {
+                                int[] count = CuToSci(mPlayer.playerReforgeCost);
+                                Main.NewText($"{ComText("IHaveSpent")} {count[0]} {ComText("Platinum")} {count[1]} {ComText("Gold")} {count[2]} {ComText("Silver")} {count[3]} {ComText("Copper")} {ComText("ToReforge")}");
+                            }
                         }
                     }
                 }
@@ -183,21 +184,21 @@ namespace FunCommand.Commands
                 {
                     if (QueryAxn(para1, name, para2))
                     {
-                        if (ParaTrig("Clear").Contains(para1))
+                        if (QueryPara(para1, para2, QueriablePara[7], para3))
                         {
-                            if (QueryPara(para2, "Clear"))
+                            if (ParaTrig("Clear").Contains(para1))
                             {
                                 ExecutionSystem.Instance.worldReforgeCost = 0;
                             }
-                        }
-                        else if (para1 != default)
-                        {
-                            ReplyInvalidPara(para1);
-                        }
-                        else
-                        {
-                            int[] count = CuToSci(ExecutionSystem.Instance.worldReforgeCost);
-                            Main.NewText($"{ComText("TinkersHaveEarn")} {count[0]} {ComText("Platinum")} {count[1]} {ComText("Gold")} {count[2]} {ComText("Silver")} {count[3]} {ComText("Copper")} {ComText("FromReforging")}");
+                            else if (para1 != default)
+                            {
+                                ReplyInvalidPara(para1);
+                            }
+                            else
+                            {
+                                int[] count = CuToSci(ExecutionSystem.Instance.worldReforgeCost);
+                                Main.NewText($"{ComText("TinkersHaveEarn")} {count[0]} {ComText("Platinum")} {count[1]} {ComText("Gold")} {count[2]} {ComText("Silver")} {count[3]} {ComText("Copper")} {ComText("FromReforging")}");
+                            }
                         }
                     }
                 }
